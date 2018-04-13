@@ -1,154 +1,118 @@
-@import url('https://fonts.googleapis.com/css?family=Asap');
-
-* {
-  font-size: inherit;
-  font-family: inherit;
-}
-
-html {
-  font-size: calc(1em + 1vw);
-  font-family: Asap, sans-serif;
-}
 
 body {
-  max-width: 20rem;
   margin: 0;
-  padding: 1rem;
+  min-width: 250px;
 }
 
-h1 {
-  margin-top: 0;
-  font-size: 1.25rem;
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
 }
 
+/* Remove margins and padding from the list */
 ul {
-  list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-ul:empty, .empty-state {
-  display: none;
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-ul:empty + .empty-state {
-  display: block;
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: #f9f9f9;
 }
 
-li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
 }
 
-.tick {
-  display: inline-block;
-  width: 0.66rem;
-  height: 0.66rem;
-  border: 0.125rem solid;
-  margin-right: 0.25rem;
-  border-radius: 0.125rem;
-}
-
-[type="checkbox"]:checked +  label .tick {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgaGVpZ2h0PSI1MCIgd2lkdGg9IjUwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgdmlld0JveD0iMCAwIDUwLjAwMDAwMSA1MC4wMDAwMDEiPiA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwIC0xMDAyLjQpIj4gIDxyZWN0IHN0eWxlPSJzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlOiMxYTFhMWE7c3Ryb2tlLXdpZHRoOjMuNDQ1MztzdHJva2UtbGluZWNhcDpyb3VuZDtmaWxsOiMxYTFhMWEiIHRyYW5zZm9ybT0ibWF0cml4KC44ODc1OSAuNDYwNjQgLS40NTEyNyAuODkyMzkgMCAwKSIgcnk9IjEuMTUwNCIgaGVpZ2h0PSIzMS42OTEiIHdpZHRoPSI1Ljk5MyIgeT0iODgyLjcxIiB4PSI0ODcuMTkiLz4gIDxyZWN0IHN0eWxlPSJzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlOiMxYTFhMWE7c3Ryb2tlLXdpZHRoOjMuMTM5MjtzdHJva2UtbGluZWNhcDpyb3VuZDtmaWxsOiMxYTFhMWEiIHRyYW5zZm9ybT0icm90YXRlKDI3LjA4NSkiIHJ5PSIuOTExNjkiIGhlaWdodD0iNi4yNzgyIiB3aWR0aD0iMTguODM1IiB5PSI5MTEuMjIiIHg9IjQ3OC42MiIvPiA8L2c+PC9zdmc+);
-  background-repeat: none;
-  background-position: center;
-  background-size: 100%;
-}
-
-[type="checkbox"]:checked + label .text {
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: #888;
+  color: #fff;
   text-decoration: line-through;
 }
 
-li label {
-  flex: 2;
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
 }
 
-li + li {
-  margin-top: 0.55rem;
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
 }
 
-button {
-  margin: 0;
-  line-height: 1;
-  border: 0;
+.close:hover {
+  background-color: #f44336;
+  color: white;
 }
 
-li button {
-  border: 0;
-  padding: 0;
-  background: 0;
+/* Style the header */
+.header {
+  background-color: #f44336;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
 }
 
-button svg {
-  width: 1.125em;
-  height: 1.125em;
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-form {
-  margin-top: 1rem;
-  display: flex;
+/* Style the input */
+input {
+  border: none;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
 }
 
-input, [type="submit"] {
-  border: 0.125rem solid;
-  border-radius: 0.125rem;
-  line-height: 1;
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-[type="text"] {
-  flex: 3;
-  margin-right: 0.25rem;
-}
-
-[type="submit"] {
-  background: #000;
-  color: #fff;
-  padding: 0.25rem 0.5rem;
-  border: 2px solid #000;
-}
-
-[type="submit"][disabled] {
-  opacity: 0.33;
-}
-
-::-webkit-input-placeholder { 
-  color: #444;
-  font-style: italic;
-}
-::-moz-placeholder { 
-  color: #444;
-  font-style: italic;
-}
-:-ms-input-placeholder { 
-  color: #444;
-  font-style: italic;
-}
-:-moz-placeholder { 
-  color: #444;
-  font-style: italic;
-}
-
-input:focus, button:focus, [type="checkbox"]:focus + label .tick {
-  outline: none;
-  box-shadow: 0 0 0 0.125rem #2a7fff;
-}
-
-[tabindex="-1"]:focus {
-  outline: none;
-}
-
-.vh {
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding:0 !important;
-  border:0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden;
-}
-
-.smaller {
-  font-size: 0.75rem;
+.addBtn:hover {
+  background-color: #bbb;
 }
