@@ -4,7 +4,6 @@
 		<title>
 			Experimental Website
 		</title>
-		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
 		<h1>Hello World
@@ -18,45 +17,66 @@
 		<p title="MAIN PAGE">
 		</p>
 		<a href="index.html">Back To Main</a>
-		<br>
 		
 
 
-		<svg style="display: none">
-  <symbol id="bin-icon" height="50" width="50" viewBox="0 0 50 50">
-   <path style="fill:#000" d="m20.651 2.3339c-.73869 0-1.3312.59326-1.3312 1.3296v2.5177h-6.3634c-.73887 0-1.3314.59331-1.3314 1.3295v1.1888c0 .73639.59249 1.3289 1.3312 1.3289h7.6948 8.8798 7.6948c.73869 0 1.3312-.59249 1.3312-1.3289v-1.1888c0-.73639-.59249-1.3296-1.3312-1.3296h-6.3634v-2.5177c0-.73639-.59249-1.3296-1.3312-1.3296h-8.8798zm-5.6786 11.897c-1.7775 0-3.2704 1.4889-3.2704 3.274v27.647c0 1.7775 1.4928 3.2704 3.2704 3.2704h20.783c1.7775 0 3.2704-1.4928 3.2704-3.2704v-27.647c0-1.7852-1.4928-3.274-3.2704-3.274h-20.783zm1.839 3.4895h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466zm7.6948 0h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466zm7.6948 0h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466z"/>
-  </symbol>
-</svg>
+		<div id="myDIV" class="header">
+		  <h2>My To Do List</h2>
+		  <input type="text" id="myInput" placeholder="Title...">
+		  <span onclick="newElement()" class="addBtn">Add</span>
+		</div>
 
-<section id="component" aria-labelledby="todos-label">
-  <p class="smaller">This is a demo from <a href="https://inclusive-components.design/a-todo-list/">A Todo List</a>, published on <strong>Inclusive Components</strong>.</p> 
-  <h1 id="todos-label" tabindex="-1">My TODO List</h1>
-  <ul>
-    <li v-for="(todo, index) in todos">
-      <input type="checkbox" :id="`todo-${index}`" v-model="todo.done" class="vh">
-      <label :for="`todo-${index}`">
-        <span class="tick"></span>
-        <span class="text">{{todo.name}}</span>
-      </label>
-      <button @click="remove(index, todo.name)" :aria-label="`delete ${todo.name}`">
-        <svg><use xlink:href="#bin-icon"></use></svg>
-      </button>
-    </li>
-  </ul>
-  <div class="empty-state">
-    <p>Either you've done everything already or there are still things to add to your list. Add your first todo &#x2193;</p>
-  </div>
-  <form @submit="add">
-    <label for="add" class="vh">
-      Write a new todo item
-    </label>
-    <input type="text" id="add" v-model="workingName" placeholder="E.g. Adopt an owl" :aria-invalid="validity">
-    <button type="submit" :disabled="validity">Add</button>
-  </form>
-  <div role="status" class="vh">
-    {{feedback}}
-  </div>
-</section>
-
+		<ul id="myUL">
+		  <li>Hit the gym</li>
+		  <li class="checked">Pay bills</li>
+		  <li>Meet George</li>
+		  <li>Buy eggs</li>
+		  <li>Read a book</li>
+		  <li>Organize office</li>
+		</ul>
+		<script type="text/javascript">
+			var app = new Vue({
+			  el: '#component',
+			  data: {
+				todos: [
+			     {
+			       name: 'Pick up kids from school',
+			       done: true
+			     },
+			     {
+			       name: 'Learn Haskell',
+			       done: false
+			     },
+			     {
+			       name: 'Sleep',
+			       done: false
+			     }
+			    ],
+			    workingName: '',
+			    feedback: ''
+			  },
+			  methods: {
+			    add(e) {
+			      e.preventDefault();
+			      this.todos.push({
+			        name: this.workingName,
+			        done: false
+			      });
+			      this.feedback = `${this.workingName} added`;
+			      this.workingName = '';
+			    },
+			    remove(index, name) {
+			      this.todos.splice(index, 1);
+			      document.getElementById('todos-label').focus();
+			      this.feedback = `${name} deleted`;
+			    }
+			  },
+			  computed: {
+			    validity() {
+			      return this.workingName.trim() === '';
+			    }
+			  }
+			});
+		</script>
 	</body>
 </html>
